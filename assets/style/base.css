@@ -1,0 +1,15 @@
+body {
+    background-color: #c0c0c0;
+    font: 1em/1.4 Calibri, sans-serif;
+    font-size: 1em;
+    font-size: calc((18 - 16)/640 * 100vw + (16 - (18 - 16)/2) * 1rem/16);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: Georgia, serif;
+}
