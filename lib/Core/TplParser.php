@@ -27,7 +27,7 @@ class TplParser
 
     private $replacement = [];
 
-    public function __construct(private string $tpl = 'index.tpl') {}
+    public function __construct(private string $tpl = 'index') {}
 
     public function __set($name, $value): void
     {
@@ -52,7 +52,7 @@ class TplParser
 
     public function render(): string
     {
-        $raw = file_get_contents("{$this->tplRoot}{$this->tpl}");
+        $raw = file_get_contents("{$this->tplRoot}{$this->tpl}.tpl");
 
         foreach ($this->replacement as $k => $v) {
             $raw = str_replace(sprintf(self::TPL_PH, $k),

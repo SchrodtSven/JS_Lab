@@ -13,3 +13,7 @@ h5,
 h6 {
     font-family: Georgia, serif;
 }
+
+footer.doc {
+    border-top: 2px dotted blue;
+}
