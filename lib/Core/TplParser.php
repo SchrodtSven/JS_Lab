@@ -39,12 +39,12 @@ class TplParser
         return $this->replacement[$name] ?? null;
     }
 
-    public function setCss(string $css='base')
+    public function setCss(string $css = 'base')
     {
         $this->replacement['css'] = sprintf(self::TPL_CSS, $css);
     }
 
-    public function setJs(string $js='foo')
+    public function setJs(string $js = 'foo')
     {
         $this->replacement['js'] = sprintf(self::TPL_JS, $js);
     }
@@ -55,9 +55,11 @@ class TplParser
         $raw = file_get_contents("{$this->tplRoot}{$this->tpl}.tpl");
 
         foreach ($this->replacement as $k => $v) {
-            $raw = str_replace(sprintf(self::TPL_PH, $k),
-                                $v,
-                                $raw);
+            $raw = str_replace(
+                sprintf(self::TPL_PH, $k),
+                $v,
+                $raw
+            );
         }
 
         return $raw;
@@ -66,6 +68,18 @@ class TplParser
     public function __toString()
     {
         return $this->render();
+    }
+
+    /**
+     * Saving dynamically rendered content to static file
+     *
+     * @param string $fn
+     * @return self
+     */
+    public function save(string $fn): self
+    {
+        file_put_contents($fn, $this->render());
+        return $this;
     }
 
     /**

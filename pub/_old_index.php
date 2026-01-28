@@ -11,16 +11,29 @@ declare(strict_types=1);
  * @since 2026-01-26
  */
 
-chdir('../');
+//chdir('../');
+print(getcwd());
+
+#var_dump(parse_url($_SERVER['REQUEST_URI']));
+
+
+
 require_once 'lib/Autoload.php';
 use SchrodtSven\JSLab\Core\TplParser;
 use SchrodtSven\JSLab\Mvc\Router;
 
-//$parser = new TplParser('canvas');
-$parser = new TplParser('plotter');
-$parser->title = 'Sven\'s playground on canvas';
-#$parser->maincontent = '<h1>Foo</h1>';
+
+$r = new Router();
+
+$parser = new TplParser('base');
+
+
+$parser->title = 'Sven\'s playground';
+//$parser->jscript = 'assets/script/foo.js';
+
+$parser->maincontent = '<h1>Foo</h1>';
 $parser->setCss('base');
 $parser->created = date('Y-m-d H:i:s');
-$parser->setJs('canvas');
+$parser->setJs('foo');
+//var_dump($parser);
 echo $parser;//->render();
