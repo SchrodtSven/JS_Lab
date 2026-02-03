@@ -14,5 +14,6 @@
     <h6>JS_Lab: {{title}}</h6> -->
       <canvas id="plot" width="1400" height="800"></canvas>
       <script src="assets/script/plotter.js"></script>
+      <script src="assets/script/fetch.js"></script>
   </body>
 </html>

@@ -8,6 +8,7 @@
 
 document.addEventListener("DOMContentLoaded", (event) => {
      p = new Plotter(768, 1024);
+     getData();
 });
 
 
