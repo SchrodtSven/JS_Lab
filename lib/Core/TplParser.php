@@ -4,17 +4,25 @@ declare(strict_types=1);
 /**
  * Very simple template parser using {{NAME}} placeholders
  * 
- 
+ *  - rendering tpl files with placeholders
+ *  - implementing Stringable
+ *  - save to static files 
+ *  - miy2c...
+ * 
+ * @FIXME Delete not replaced placeholders
+ * 
  * @author Sven Schrodt<sven@schrodt.club>
  * @link https://github.com/SchrodtSven/JSLab
  * @package JSLab
  * @version 0.1
- * @since 2021-01-26
+ * @since 2026-01-26
  */
 
 namespace SchrodtSven\JSLab\Core;
 
-class TplParser
+use Stringable;
+
+class TplParser implements Stringable
 {
 
     private const string TPL_PH = '{{%s}}';

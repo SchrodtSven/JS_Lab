@@ -7,25 +7,29 @@
 
 
 document.addEventListener("DOMContentLoaded", (event) => {
-     p = new Plotter(800, 1400);
+     p = new Plotter(768, 1024);
 });
 
 
 class Plotter {
 
-     // Private properties
-     height = 800
-     width = 1400
+     // default properties for canvas 
+     height = 800;
+     width = 1400;
+
+     lineWidth = 1;
+
      constructor(height, width) {
           this.height = height | this.height;
-          this.width = width | width;
+          this.width = width | this.width;
           const canvas = document.getElementById("plot");
           this.ctx = canvas.getContext("2d");
+          console.table(this.ctx);
           this.quarterX = this.width / 2;
           this.quarterY = this.height / 2;
 
           this._initCoordSys();
-          this.grid();
+          this.grid(33,'black');
 
 
           this.drawFunc(function (x) {
@@ -39,11 +43,35 @@ class Plotter {
 
           this.drawFunc(function (x) {
                return Math.tan(x); // The function
-          }, 'blue', 33, 2);
+          }, 'blue', 33, 1);
+
+
+
+
+
+
+          //this.ctx.lineWidth = 6;
+          //console.log(this.ctx);
+          this.drawFunc(function (x) {
+               return x * x * x; // The function
+          }, 'yellow', 50, 1);
+
+
+          this.drawFunc(function (x) {
+               return Math.tan(x); // The function
+          }, 'blue', 33, 1);
+
+          this.drawFunc(function (x) {
+               return x*x; // The function
+          }, 'gray', 55, 1.9);
+
+
      }
 
      set width(val) {
           this.width = val;
+          this._initCoordSys();
+          return this;
      }
 
      get width() {
@@ -52,11 +80,25 @@ class Plotter {
 
      set height(val) {
           this.height = val;
+          this._initCoordSys();
+          return this;
      }
 
      get height() {
           return this.height;
      }
+
+     set lineWidth(val) {
+          this.ctx.lineWidth = val;
+          console.log(this.ctx.lineWidth);
+          console.log(val);
+          return this;
+     }
+
+     get lineWidth() {
+          return this.ctx.lineWidth;
+     }
+
 
      /**
       * Init as cartesian coordinate system:
@@ -66,13 +108,15 @@ class Plotter {
       */
 
      _initCoordSys() {
-          let width = this.width;
-          let height = this.height
+
           this.ctx.clearRect(0, 0, this.width, this.height); // Clear canvas
-          // Coordinate System Shift: Move (0,0) to center
+
+          // Save curent context's state  
           this.ctx.save();
-          this.ctx.translate(width / 2, height / 2);
-          this.ctx.scale(1, -1); // Flip Y-axis for Cartesian graph
+          
+          // Coordinate System Shift: Move (0,0) to center
+          this.ctx.translate(this.width / 2, this.height / 2);
+          this.ctx.scale(1, -1); // Flip Y-axis -> we want a Cartesian Graph
 
           // Draw border
           this.ctx.beginPath();
@@ -82,19 +126,17 @@ class Plotter {
           this.ctx.lineTo(-this.quarterX, this.quarterY);
           this.ctx.closePath();
           this.ctx.stroke();
+          
           // Draw axes
-
           this.ctx.beginPath();
-          this.ctx.moveTo(-width / 2, 0);
-          this.ctx.lineTo(width / 2, 0); // X-axis
-          this.ctx.moveTo(0, -height / 2);
-          this.ctx.lineTo(0, height / 2); // Y-axis
+          this.ctx.moveTo(-this.width / 2, 0);
+          this.ctx.lineTo(this.width / 2, 0); // X-axis
+          this.ctx.moveTo(0, -this.height / 2);
+          this.ctx.lineTo(0, this.height / 2); // Y-axis
           this.ctx.strokeStyle = '#123';
-          //this.ctx.strokeStyle = 'pink';
-          //this.ctx.closePath();
           this.ctx.stroke();
-          //console.table(this.ctx);
-          //console.table(this);
+          
+
      }
 
      grid(step = 20, color='gray') {

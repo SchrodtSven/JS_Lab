@@ -24,3 +24,4 @@ $parser->setCss('base');
 $parser->created = date('Y-m-d H:i:s');
 $parser->setJs('canvas');
 echo $parser;//->render();
+//$parser->save('foo.html');

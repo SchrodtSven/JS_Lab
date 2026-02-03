@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 /**
- * HTTP routing
+ * HTTP routing stuff
  * 
  
  * @author Sven Schrodt<sven@schrodt.club>
  * @link https://github.com/SchrodtSven/JSLab
  * @package JSLab
  * @version 0.1
- * @since 2021-01-26
+ * @since 2026-01-26
  */
 
 namespace SchrodtSven\JSLab\Mvc;
@@ -57,7 +57,7 @@ class Router
 
     private function _parse(array $parts)
     {
-        echo __FUNCTION__ . ' :: ';
+        //echo __FUNCTION__ . ' :: ';
         switch (count($parts)) {
             case 1:
                 $this->mod = array_shift($parts);
